@@ -29,7 +29,7 @@ RUN git clone https://github.com/novnc/noVNC.git /opt/novnc \
     && git clone https://github.com/novnc/websockify.git /opt/novnc/utils/websockify
 
 COPY startup.sh /startup.sh
-COPY jwmrc /root/.jwmrc
+# COPY jwmrc /root/.jwmrc
 
 RUN chmod +x /startup.sh
 
