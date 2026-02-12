@@ -22,6 +22,7 @@ RUN apt-get update \
         neofetch \
         ranger \
         htop \
+        pcmanfm \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
