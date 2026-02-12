@@ -1,0 +1,15 @@
+{
+  "name": "Light Linux Desktop (noVNC)",
+  "build": {
+    "dockerfile": "../Dockerfile"
+  },
+  "forwardPorts": [6080],
+  "portsAttributes": {
+    "6080": {
+      "label": "Linux Desktop noVNC",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "overrideCommand": false,
+  "postStartCommand": "echo 'Desktop ready on port 6080'"
+}
