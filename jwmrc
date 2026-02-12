@@ -1,0 +1,46 @@
+<JWM>
+
+  <StartupCommand>
+    xsetroot -solid "#000000"
+  </StartupCommand>
+
+  <Desktops>
+    <Desktop name="1"/>
+  </Desktops>
+
+  <FocusModel>click</FocusModel>
+
+  <DoubleClickSpeed>400</DoubleClickSpeed>
+
+  <Border>1</Border>
+  <TitleHeight>18</TitleHeight>
+
+  <Tray x="0" y="-1" height="20" autohide="false">
+    <Clock format="%H:%M"/>
+  </Tray>
+
+  <Key key="Alt+Return">
+    <Exec>xterm</Exec>
+  </Key>
+
+  <Key key="Alt+F">
+    <Exec>firefox-esr</Exec>
+  </Key>
+
+  <Key key="Alt+Q">
+    <Close/>
+  </Key>
+
+  <Key key="Alt+Tab">
+    <NextWindow/>
+  </Key>
+
+  <Key key="Alt+Shift+Tab">
+    <PrevWindow/>
+  </Key>
+
+  <Key key="Alt+Ctrl+BackSpace">
+    <Restart/>
+  </Key>
+
+</JWM>
