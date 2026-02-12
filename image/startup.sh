@@ -1,19 +1,31 @@
-#!/bin/bash
+#!/bin/sh
+set -e
 
-mkdir -p /var/run/sshd
+export DISPLAY=:0
+export HOME=/root
 
-chown -R root:root /root
-mkdir -p /root/.config/pcmanfm/LXDE/
-cp /usr/share/doro-lxde-wallpapers/desktop-items-0.conf /root/.config/pcmanfm/LXDE/
+mkdir -p /root/.icewm
 
-if [ -n "$VNC_PASSWORD" ]; then
-    echo -n "$VNC_PASSWORD" > /.password1
-    x11vnc -storepasswd $(cat /.password1) /.password2
-    chmod 400 /.password*
-    sed -i 's/^command=x11vnc.*/& -rfbauth \/.password2/' /etc/supervisor/conf.d/supervisord.conf
-    export VNC_PASSWORD=
+if [ ! -f /root/.icewm/preferences ]; then
+cat <<EOF > /root/.icewm/preferences
+ShowTaskBar=1
+ShowClock=1
+EOF
 fi
 
-cd /usr/lib/web && ./run.py > /var/log/web.log 2>&1 &
-nginx -c /etc/nginx/nginx.conf
-exec /bin/tini -- /usr/bin/supervisord -n
+Xvfb :0 -screen 0 1280x800x24 &
+sleep 2
+
+dbus-launch icewm-session &
+
+x11vnc \
+  -display :0 \
+  -localhost \
+  -nopw \
+  -forever \
+  -shared \
+  -rfbport 5900 &
+
+/opt/novnc/utils/novnc_proxy \
+  --vnc localhost:5900 \
+  --listen 0.0.0.0:6080
